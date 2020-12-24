@@ -162,8 +162,6 @@ void array_to_image(png_byte *image)
   }
 }
 
-// the distance is being calculated in a similar way to the one in Bilateral filter
-// https://en.wikipedia.org/wiki/Bilateral_filter
 __device__ float colorDistance(float4 a, float4 b)
 {
   return (
@@ -190,12 +188,11 @@ void errorexit(const char *s)
 }
 
 __host__
-void printtime(struct timeval *start,struct timeval *stop) 
+long getTime(struct timeval *start,struct timeval *stop) 
 {
   long time=1000000*(stop->tv_sec-start->tv_sec)+stop->tv_usec-start->tv_usec;
 
-  printf("%ld microseconds\n",time);
-
+  return time / 1000;
 }
 
 __global__ 
@@ -231,14 +228,10 @@ void knn_filter(png_byte *img, png_byte *img_out, int width, int height)
 
         float pixel_distance = pixelDistance((float)x, (float)y);
 
-        // problem here
         float color_distance = colorDistance(color_center, color_xy);
         
         // Denosing
         float weight_xy = expf(-(pixel_distance * INV_FILTER_AREA + color_distance * NOISE));
-
-        // Gaussian blur
-        // float weight_xy = expf(-(pixel_distance * INV_FILTER_AREA));
         
         color.x += color_xy.x * weight_xy;
         color.y += color_xy.y * weight_xy;
@@ -270,6 +263,9 @@ void knn_filter(png_byte *img, png_byte *img_out, int width, int height)
 
 int main(int argc,char **argv) {
 
+  struct timeval start, stop;
+  gettimeofday(&start, NULL);
+
   png_byte *host_img;
 
   // read png file to an array
@@ -277,8 +273,6 @@ int main(int argc,char **argv) {
 
   // allocate memory
   int size = width * height * sizeof(png_byte) * 4;
-
-  // printf("Size: %d\tWidth: %d\tHeight: %d\n", size, width, height);
 
   cudaMallocHost((void**)&host_img, size);
   
@@ -289,16 +283,13 @@ int main(int argc,char **argv) {
   png_byte *device_output = NULL;
   if (cudaSuccess!=cudaMalloc((void **)&device_output, size))
     errorexit("Error allocating memory on the GPU 2");
-  printf("Allocating memory...");
 
   // copy image array to allocated memory
   image_to_array(host_img);
-  printf("Copying image array to allocated space...");
 
   // copy image array to device
   if (cudaSuccess!=cudaMemcpy(device_img, host_img, size, cudaMemcpyHostToDevice))
     errorexit("Error copying data to device");
-  printf("Copying data to device...");
 
   // kernel block/thread configuration
   dim3 threadsPerBlock(8, 8);
@@ -314,11 +305,9 @@ int main(int argc,char **argv) {
   // copy memory back to host
   if (cudaSuccess!=cudaMemcpy(host_img, device_output, size, cudaMemcpyDeviceToHost))
       errorexit("Error copying results to host");
-  printf("Copying data back to host...");
   
   // prepare array to write png
   array_to_image(host_img);
-  printf("Preparing image to write...");
 
   // release resources
   if (cudaSuccess!=cudaFreeHost(host_img))
@@ -327,13 +316,17 @@ int main(int argc,char **argv) {
     errorexit("Error when deallocating space on the GPU");
   if (cudaSuccess!=cudaFree(device_output))
     errorexit("Error when deallocating output space on the GPU");
-  printf("Releasing resources...");
 
   // write array to new png file
-  printf("Writing PNG...");
   write_png_file(argv[2]);
+  gettimeofday(&stop, NULL);
+  long timeElapsed = getTime(&start, &stop);
 
-  printf("Success.");
+  FILE *pFile;
+  pFile = fopen("knn_tests.txt", "a");
+  fprintf(pFile, "Size: %dx%d Time elapsed: %ld ms\n", width, height, timeElapsed);
+  fclose(pFile);
+  printf("Success.\n");
 
   return 0;
 }

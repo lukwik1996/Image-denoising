@@ -9,7 +9,7 @@ In order to compile this program you need a suitable NVIDIA GPU and CUDA develop
 You can compile the application using a command:
 
 ``` 
-nvcc knn_image_denoiser.cu -lpng -o knn_image_denoiser
+nvcc ./knn_image_denoiser.cu -lpng -o knn_image_denoiser.out
 ```
 
 ## Running the application
@@ -19,7 +19,7 @@ In order to run the program, you need to specify two arguments:
 
 For example:
 ```
-knn_image_denoiser.out input.png output.png
+./knn_image_denoiser.out input.png output.png
 ```
 
 ## Example images before and after denoising process:
