@@ -2,7 +2,7 @@
 Image denoising using K Nearest Neighbors filter implemented in CUDA technology
 
 ## Overview
-This application uses a K Nearest Neighbors filter to remove noise from images. The project was based on [this paper](http://developer.download.nvidia.com/compute/cuda/1_1/Website/projects/imageDenoising/doc/imageDenoising.pdf).
+This application uses a K Nearest Neighbors filter to remove noise from images. The project was based on [this paper](https://developer.download.nvidia.com/compute/cuda/1.1-Beta/x86_website/projects/imageDenoising/doc/imageDenoising.pdf).
 
 ## Compilation
 In order to compile the cuda program you need a suitable NVIDIA GPU and CUDA development environment.
