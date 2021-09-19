@@ -5,11 +5,18 @@ Image denoising using K Nearest Neighbors filter implemented in CUDA technology
 This application uses a K Nearest Neighbors filter to remove noise from images. The project was based on [this paper](http://developer.download.nvidia.com/compute/cuda/1_1/Website/projects/imageDenoising/doc/imageDenoising.pdf).
 
 ## Compilation
-In order to compile this program you need a suitable NVIDIA GPU and CUDA development environment.
+In order to compile the cuda program you need a suitable NVIDIA GPU and CUDA development environment.
 You can compile the application using a command:
 
 ``` 
 nvcc ./knn_image_denoiser.cu -lpng -o knn_image_denoiser.out
+```
+
+Compilation of the other files can be done using:
+
+```
+gcc -o knn_image_denoiser_omp -fopenmp -lpng knn_image_denoiser_omp.c
+gcc -o knn_image_denoiser -lpng knn_image_denoiser.c
 ```
 
 ## Running the application
@@ -22,7 +29,14 @@ For example:
 ./knn_image_denoiser.out input.png output.png
 ```
 
+
 ## Example images before and after denoising process:
+
+Noisy image                |  Fixed image
+:-------------------------:|:-------------------------:
+![](<img src="images_noise/medusa_noise.png" alt="before" width="400"/>)  |  ![](<img src="images_fixed/medusa_fixed.png" alt="after" width="400"/>)
+![](<img src="images_noise/portrait_noise.png" alt="before" width="400"/>)  |  ![](<img src="images_fixed/portrait_fixed.png" alt="after" width="400"/>)
+![](<img src="images_noise/yoda_noise.png" alt="before" width="400"/>)  |  ![](<img src="images_fixed/yoda_fixed.png" alt="after" width="400"/>)
 
 <img src="images_noise/medusa_noise.png" alt="before" width="400"/>
 <img src="images_fixed/medusa_fixed.png" alt="after" width="400"/>
