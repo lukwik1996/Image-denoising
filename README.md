@@ -34,15 +34,6 @@ For example:
 
 Noisy image                |  Fixed image
 :-------------------------:|:-------------------------:
-![](<img src="images_noise/medusa_noise.png" alt="before" width="400"/>)  |  ![](<img src="images_fixed/medusa_fixed.png" alt="after" width="400"/>)
-![](<img src="images_noise/portrait_noise.png" alt="before" width="400"/>)  |  ![](<img src="images_fixed/portrait_fixed.png" alt="after" width="400"/>)
-![](<img src="images_noise/yoda_noise.png" alt="before" width="400"/>)  |  ![](<img src="images_fixed/yoda_fixed.png" alt="after" width="400"/>)
-
-<img src="images_noise/medusa_noise.png" alt="before" width="400"/>
-<img src="images_fixed/medusa_fixed.png" alt="after" width="400"/>
-
-<img src="images_noise/portrait_noise.png" alt="before" width="400"/>
-<img src="images_fixed/portrait_fixed.png" alt="after" width="400"/>
-
-<img src="images_noise/yoda_noise.png" alt="before" width="400"/>
-<img src="images_fixed/yoda_fixed.png" alt="after" width="400"/>
+![](images_noise/medusa_noise.png)  |  ![](images_fixed/medusa_fixed.png)
+![](images_noise/portrait_noise.png)  |  ![](images_fixed/portrait_fixed.png)
+![](images_noise/yoda_noise.png)  |  ![](images_fixed/yoda_fixed.png)
