@@ -24,14 +24,11 @@ For example:
 
 ## Example images before and after denoising process:
 
-<img src="images/medusa_noise.png" alt="before" width="400"/>
-<img src="images/medusa_fixed.png" alt="after" width="400"/>
+<img src="images_noise/medusa_noise.png" alt="before" width="400"/>
+<img src="images_fixed/medusa_fixed.png" alt="after" width="400"/>
 
-<img src="images/portrait_noise.png" alt="before" width="400"/>
-<img src="images/portrait_fixed.png" alt="after" width="400"/>
+<img src="images_noise/portrait_noise.png" alt="before" width="400"/>
+<img src="images_fixed/portrait_fixed.png" alt="after" width="400"/>
 
-<img src="images/yoda_noise.png" alt="before" width="400"/>
-<img src="images/yoda_fixed.png" alt="after" width="400"/>
-
-<img src="images/road_noise.png" alt="before" width="400"/>
-<img src="images/road_fixed.png" alt="after" width="400"/>
+<img src="images_noise/yoda_noise.png" alt="before" width="400"/>
+<img src="images_fixed/yoda_fixed.png" alt="after" width="400"/>

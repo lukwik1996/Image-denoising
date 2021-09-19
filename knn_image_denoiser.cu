@@ -322,6 +322,8 @@ int main(int argc,char **argv) {
   gettimeofday(&stop, NULL);
   long timeElapsed = getTime(&start, &stop);
 
+    // printf("Size: %dx%d Time elapsed: %ld ms\n", width, height, timeElapsed);
+
   FILE *pFile;
   pFile = fopen("knn_tests.txt", "a");
   fprintf(pFile, "Size: %dx%d Time elapsed: %ld ms\n", width, height, timeElapsed);
